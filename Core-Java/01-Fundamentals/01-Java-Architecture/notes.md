@@ -243,3 +243,82 @@ public class DataTypes {
     }
 }
 
+3. Type Casting
+3.1 What is type casting?
+Type conversion means converting a value from one data type to another.
+
+For numeric primitive types, two important categories are widening and narrowing conversions.
+3.2 Widening conversion (implicit)
+A widening conversion converts a value to a compatible type that can represent its range more broadly. Java generally performs these conversions automatically.
+
+Typical numeric widening paths include:
+
+byte  -> short -> int -> long -> float -> double
+char  -> int   -> long -> float -> double
+This is a simplified map of permitted widening conversions, not a claim that every step preserves all precision. For example, converting a large long to float can lose precision.
+
+Example:
+int number = 100;
+double result = number;
+
+System.out.println(result); // 100.0
+
+3.3 Narrowing conversion (explicit)
+A narrowing conversion converts to a type with a smaller range or precision. An explicit cast is generally required.
+double number = 99.99;
+int result = (int) number;
+
+System.out.println(result); // 99
+Casting from floating-point to integer truncates the fractional part toward zero; it does not round to the nearest integer.
+
+3.4 Overflow during narrowing
+int number = 130;
+byte result = (byte) number;
+
+System.out.println(result); // -126
+A byte can represent only -128 through 127. Narrowing an integer retains the low-order bits, so the resulting signed value can differ from the original value.
+
+3.5 Arithmetic promotion
+In most arithmetic expressions, byte, short, and char operands are promoted to int.
+byte a = 10;
+byte b = 20;
+
+// byte sum = a + b; // Compilation error: expression is int
+
+int sum = a + b;
+System.out.println(sum); // 30
+
+An explicit cast can be used when a byte result is intended:
+byte sum = (byte) (a + b);
+
+3.6 String conversion
+Convert a number to a String:
+int age = 20;
+String text = String.valueOf(age);
+Convert a String to an integer:
+String value = "100";
+int number = Integer.parseInt(value);
+Convert a String to a decimal:
+double price = Double.parseDouble("99.5");
+
+Parsing invalid text can throw NumberFormatException.
+3.7 Important distinction
+- Casting: A language conversion, such as (int) 9.8.
+- Parsing: Reading text and converting it to a value, such as Integer.parseInt("100").
+
+3.8 Practice
+1. Convert an int to double.
+int a=10;
+double b=a;
+System.out.println(b);
+2. Convert a double to int.
+double c =12.99;
+int d= c;
+System.out.println(d);
+
+3. Convert a numeric String to int.
+
+
+4. Demonstrate narrowing overflow with byte.
+
+5. Predict the result of adding two byte values.
